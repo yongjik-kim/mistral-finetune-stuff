@@ -1,12 +1,13 @@
 # Extract single book from phil_nlp dataset. Anti-Oedipus for example.
 import pandas as pd
 import json
+from tqdm import tqdm
 
 # Replace with the actual file paths and details
 csv_file_path = './philosophy_data.csv'
-jsonl_file_path = './anti-oedipus.jsonl'
-start_row = '212552'  
-end_row = '219230'
+jsonl_file_path = './all.jsonl'
+start_row = '2'  
+end_row = '396428'
 column = 'E' # 5th column, aka sentece_str
 
 # Convert column letter to zero-based index (if necessary)
@@ -21,7 +22,7 @@ def create_jsonl_from_csv(csv_path, jsonl_path, start, end, column_idx):
     
     # Write the dictionary to a JSONL file
     with open(jsonl_path, 'w') as outfile:
-        for entry in [jsonl_content]:
+        for entry in tqdm([jsonl_content]):
             json_line = json.dumps(entry)
             outfile.write(json_line + '\n')
 
